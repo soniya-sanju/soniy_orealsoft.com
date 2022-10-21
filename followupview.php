@@ -41,7 +41,7 @@ include("include/tableheader.php");
               <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                 
+                  John Pierce
                   <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
                 </h3>
                 <p class="text-sm">I got your message bro</p>
@@ -126,8 +126,8 @@ include("include/tableheader.php");
         <div class="image">
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-       <div class="info">
-          <a href="" class="d-block"></a>
+        <div class="info">
+          <a href="#" class="d-block">Alexander Pierce</a>
         </div>
       </div>
 
@@ -170,7 +170,7 @@ include("include/tableheader.php");
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Student Register View Table</h3>
+                <h3 class="card-title">Follow Up View Table</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body" id="example">
@@ -178,59 +178,19 @@ include("include/tableheader.php");
                   <thead >
                   <tr>
                     <th>Sl No</th>
-                    <th>Name</th>
-                    <th>Father Name</th>
-                    <th>Mother Name</th>
-                    <th>Address</th>
-                    <th>Mobile number</th>
-                    <th>Mobile Number 2</th>
-                    <th>Date Of Birth</th>
-                    <th>Adhar Number</th>
-                    <th>Student Id</th>
-                    <th>Student Image</th>
-                    <th>Qualification</th>
-                    <th>Course selcted</th>
-                    <th>Sub course</th>
-                    <th>Time duration</th>
-                    <th>Fees structure</th>
-                
-                    <th>Book</th>
-                    <th>Estimated ending time</th>
+                    <th>Student Name</th>
+                    <th>Staff Name</th>
+                    <th>Replay</th>
+                    <th>Description</th>
+                    <th>Admission_status</th>
+                    <th>updation</th>
                     <th>Update</th>
-                    <th>Delete</th>
-                    <th>Pay Fees</th>
-                    
+                    <th>Delete</th>                    
                   </tr>
-                  <tfoot>
-                    <tr>
-                    <th>Sl No</th>
-                    <th>Name</th>
-                    <th>Father Name</th>
-                    <th>Mother Name</th>
-                    <th>Address</th>
-                    <th>Mobile number</th>
-                    <th>Mobile Number 2</th>
-                    <th>Date Of Birth</th>
-                    <th>Adhar Number</th>
-                    <th>Student Id</th>
-                    <th>Student Image</th>
-                    <th>Qualification</th>
-                    <th>Course selcted</th>
-                    <th>Sub course</th>
-                    <th>Time duration</th>
-                    <th>Fees structure</th>
-                   
-                    <th>Book</th>
-                    <th>Estimated ending time</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                    <th>Pay Fees</th>
-                    
-                  </tr>
-                  </tfoot>
                    </thead>
                   <?php
-                $result = $db->query("SELECT * FROM student_register");
+                //$result = $db->query("SELECT feedback.*,enquiry.id,enquiry.name FROM `feedback`JOIN enquiry ON enquiry.id= feedback.enqid ");
+                $result=mysqli_query($db,"SELECT * FROM feedback ");
                 $counter = 0;
                 if(mysqli_num_rows($result) > 0) {
               ?>
@@ -241,35 +201,23 @@ include("include/tableheader.php");
               ?>
                  
              <tr>
-            <td><?php echo ++$counter; ?> </td>
-            <td><?php echo $row["name"]; ?></td>
-            <td><?php echo $row["fathername"]; ?></td>
-            <td><?php echo $row["mothername"]; ?></td>
-            <td><?php echo $row["address"]; ?></td>
-            <td><?php echo $row["mobile"]; ?></td>
-            <td><?php echo $row["mobile1"]; ?></td>
-            <td><?php echo $row["dob"]; ?></td>
-            <td><?php echo $row["adharno"]; ?></td>
-            <td><?php echo $row["studentid"]; ?></td>
-            <td><?php echo $row["stu_image"]; ?></td>
-            <td><?php echo $row["qualification"]; ?></td>
-            <td><?php echo $row["coursename"]; ?></td>
-            <td><?php echo $row["subcourse"]; ?></td>
-            <td><?php echo $row["duration"]; ?></td>
-            <td><?php echo $row["fees"]; ?></td>
-        <!--<td><?php echo ($row['fees'] - $row['payamount']);?></td>-->
-            <td><?php echo $row["book"]; ?></td>
-            <td><?php echo $row["endingtime"]; ?></td>
+            <td><?php echo ++$counter; ?></td> 
+            <td><?php echo $row["enqid"]; ?></td>
+            <td><?php echo $row["staff_name"]; ?></td>
+            <td><?php echo $row["Replay"]; ?></td>
+            <td><?php echo $row["Description"]; ?></td>
+            <td><?php echo $row["Admission_status"]; ?></td>
+            <td><?php echo $row["updation"]; ?></td>
 
-            <td><a href="updatestudent.php?id=<?php echo $row['id'];?>&opr=upd ">
+            <td><a href="updatefollowup.php?id=<?php echo $row['id'];?>&opr=upd ">
               <i style="font-size:18px" class="fa">&#xf044;</i>
             </a></td>
 
-            <td><a href="studentregisterview.php?id=<?php echo $row['id'];?>&opr=del ">
+            <td><a href="followupview.php?id=<?php echo $row['id'];?>&opr=del ">
              <i class="fa fa-trash" aria-hidden="true"></i>
             </a></td>
 
-            <td><a href="payment.php?studentid=<?php echo $row['studentid'];?>&opr=upd "class="btn btn-sm btn-info">Pay Today</a></td>
+           
             </tr>
            
             <?php
@@ -298,6 +246,8 @@ include("include/tableheader.php");
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+
 <?php 
 include("include/tablefooter.php");
 
@@ -306,14 +256,14 @@ include("include/tablefooter.php");
  
 
           if($opr=='del'){  
-            $sql= mysqli_query($db,"DELETE FROM student_register WHERE id='" . $_GET["id"] . "'");
+            $sql= mysqli_query($db,"DELETE FROM feedback WHERE id='" . $_GET["id"] . "'");
             if (mysqli_query($db, $sql)) {
                 echo "Record deleted successfully";
             }  
     if(mysqli_affected_rows($db)){
         echo "<script>
         alert('Data Deleted');
-        window.location.href = 'studentregisterview.php';
+        window.location.href = 'followupview.php';
         </script>";
         exit;
       }
@@ -321,15 +271,8 @@ include("include/tablefooter.php");
        echo "Opps something wrong!"; 
       }
     }
-  
+   
   ?>
 
-<script>
-   $(document).ready(function () {
-    $('#example').DataTable({
-         scrollX: true,
-    });
-});
-</script>
 </body>
 </html>

@@ -41,7 +41,7 @@ include("include/tableheader.php");
               <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                 
+                  John Pierce
                   <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
                 </h3>
                 <p class="text-sm">I got your message bro</p>
@@ -126,8 +126,8 @@ include("include/tableheader.php");
         <div class="image">
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-       <div class="info">
-          <a href="" class="d-block"></a>
+        <div class="info">
+          <a href="#" class="d-block">Alexander Pierce</a>
         </div>
       </div>
 
@@ -156,81 +156,94 @@ include("include/tableheader.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Fees Report</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Fees Report</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
+    <section class="content"><!-- Main content -->  
+<div class="container">
+<div class="row">
+<div class="col-12">
+<div class="card">
+<div class="card-header">               
+<form method="post" enctype="multipart-form-data">
+<div>
+<div class="row ml-auto">
+<div class="col-12 col-md-4">
+<div class="form-group">
+<label for="categorie name">From Date</label>
+<input type="date" class="form-control" id="fromdate" name="fromdate" style="border: 1px solid #d2d6da;border-radius: 0.1rem;">
+</div> <!-- /.form-group -->               
+</div> <!-- /.col -->
 
-            <div class="card">
+<div class="col-12 col-md-4">
+<div class="form-group">
+<label for="exampleInputimage">To Date</label>
+<input type="date" class="form-control" id="todate" name="todate" style="border: 1px solid #d2d6da; border-radius: 0.1rem;"  onclick ="function()" >
+</div> <!-- /.form-group -->               
+</div> <!-- /.col -->
+
+                                               
+<div class="col-12 col-md-4" style=" float: right;">   
+<label for="examplesubmitbutton"></label>
+<button type="submit" name="search" id="search" value="submit" class="btn btn-primary btn-block active">Search</button>
+  
+</div><!-- /.col -->
+</div><!-- row-->
+</form>
+
+            <!---<div class="card">
               <div class="card-header">
-                <h3 class="card-title">Student Register View Table</h3>
-              </div>
+                <h3 class="card-title">Payment Report</h3>
+              </div>-->
               <!-- /.card-header -->
               <div class="card-body" id="example">
                 <table id="example1" class="table table-bordered table-striped">
                   <thead >
                   <tr>
                     <th>Sl No</th>
-                    <th>Name</th>
-                    <th>Father Name</th>
-                    <th>Mother Name</th>
-                    <th>Address</th>
-                    <th>Mobile number</th>
-                    <th>Mobile Number 2</th>
-                    <th>Date Of Birth</th>
-                    <th>Adhar Number</th>
                     <th>Student Id</th>
-                    <th>Student Image</th>
-                    <th>Qualification</th>
-                    <th>Course selcted</th>
-                    <th>Sub course</th>
-                    <th>Time duration</th>
-                    <th>Fees structure</th>
-                
-                    <th>Book</th>
-                    <th>Estimated ending time</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                    <th>Pay Fees</th>
+                    <th>Fees</th>
+                    <!--<th>Paid Amount</th>-->
+                    <th>Advance Fees</th>
+                    <th>Balance Amount</th>
                     
+                   
                   </tr>
                   <tfoot>
                     <tr>
                     <th>Sl No</th>
-                    <th>Name</th>
-                    <th>Father Name</th>
-                    <th>Mother Name</th>
-                    <th>Address</th>
-                    <th>Mobile number</th>
-                    <th>Mobile Number 2</th>
-                    <th>Date Of Birth</th>
-                    <th>Adhar Number</th>
                     <th>Student Id</th>
-                    <th>Student Image</th>
-                    <th>Qualification</th>
-                    <th>Course selcted</th>
-                    <th>Sub course</th>
-                    <th>Time duration</th>
-                    <th>Fees structure</th>
+                    <th>Fees</th>
+                    <!--<th>Paid Amount</th>-->
+                    <th>Advance Fees</th>
+                    <th>Balance Amount</th>
                    
-                    <th>Book</th>
-                    <th>Estimated ending time</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                    <th>Pay Fees</th>
                     
                   </tr>
                   </tfoot>
                    </thead>
                   <?php
-                $result = $db->query("SELECT * FROM student_register");
+                    if(isset($_POST['search']))
+                     {
+                      
+                        $fromdate=date("Y-m-d", strtotime($_POST['fromdate']));
+                        $todate=date("Y-m-d", strtotime($_POST['todate']));
+
+                      $result=mysqli_query($db,"SELECT * FROM payment WHERE DATE(payment.entrytime)between '".$fromdate."' AND '".$todate."' ORDER BY payment.id Desc");
+                      
+                    }else{
+                       $result = $db->query("SELECT * FROM payment ORDER BY payment.id Desc");
+
+                    }
+               
                 $counter = 0;
                 if(mysqli_num_rows($result) > 0) {
               ?>
@@ -242,34 +255,12 @@ include("include/tableheader.php");
                  
              <tr>
             <td><?php echo ++$counter; ?> </td>
-            <td><?php echo $row["name"]; ?></td>
-            <td><?php echo $row["fathername"]; ?></td>
-            <td><?php echo $row["mothername"]; ?></td>
-            <td><?php echo $row["address"]; ?></td>
-            <td><?php echo $row["mobile"]; ?></td>
-            <td><?php echo $row["mobile1"]; ?></td>
-            <td><?php echo $row["dob"]; ?></td>
-            <td><?php echo $row["adharno"]; ?></td>
             <td><?php echo $row["studentid"]; ?></td>
-            <td><?php echo $row["stu_image"]; ?></td>
-            <td><?php echo $row["qualification"]; ?></td>
-            <td><?php echo $row["coursename"]; ?></td>
-            <td><?php echo $row["subcourse"]; ?></td>
-            <td><?php echo $row["duration"]; ?></td>
             <td><?php echo $row["fees"]; ?></td>
-        <!--<td><?php echo ($row['fees'] - $row['payamount']);?></td>-->
-            <td><?php echo $row["book"]; ?></td>
-            <td><?php echo $row["endingtime"]; ?></td>
+            <!--<td><?php echo $row["paidamount"]; ?></td>-->
+            <td><?php echo $row["advance_fees"]; ?></td>
+            <td><?php echo ($row['fees'] - $row['advance_fees']);?></td>
 
-            <td><a href="updatestudent.php?id=<?php echo $row['id'];?>&opr=upd ">
-              <i style="font-size:18px" class="fa">&#xf044;</i>
-            </a></td>
-
-            <td><a href="studentregisterview.php?id=<?php echo $row['id'];?>&opr=del ">
-             <i class="fa fa-trash" aria-hidden="true"></i>
-            </a></td>
-
-            <td><a href="payment.php?studentid=<?php echo $row['studentid'];?>&opr=upd "class="btn btn-sm btn-info">Pay Today</a></td>
             </tr>
            
             <?php
@@ -306,14 +297,14 @@ include("include/tablefooter.php");
  
 
           if($opr=='del'){  
-            $sql= mysqli_query($db,"DELETE FROM student_register WHERE id='" . $_GET["id"] . "'");
+            $sql= mysqli_query($db,"DELETE FROM payment WHERE id='" . $_GET["id"] . "'");
             if (mysqli_query($db, $sql)) {
                 echo "Record deleted successfully";
             }  
     if(mysqli_affected_rows($db)){
         echo "<script>
         alert('Data Deleted');
-        window.location.href = 'studentregisterview.php';
+        window.location.href = 'paymentsview.php';
         </script>";
         exit;
       }
@@ -321,7 +312,9 @@ include("include/tablefooter.php");
        echo "Opps something wrong!"; 
       }
     }
-  
+   else{    
+    echo "<h1>error</h1>";
+    }
   ?>
 
 <script>

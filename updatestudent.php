@@ -150,7 +150,7 @@ $opr = $_GET['opr'];
               <div class="form-group">
                  <div class="custom-file">
               <label for="exampleInputimage">Student image</label>
-              <input type="file" class="form-control" id="stuimage" name="stuimage" placeholder="Upload image " required value="<?php echo $row['stu_image']; ?>">
+              <input type="file" class="form-control" id="stuimage" name="stuimage" placeholder="Upload image " value="<?php echo $row['stu_image']; ?>">
             </div>
               </div> <!-- /.form-group -->               
               </div> <!-- /.col -->
@@ -236,7 +236,7 @@ $opr = $_GET['opr'];
    if(isset($_POST['update']))
      { 
 
-      $date =  date("y-m-d H:i:s");
+      $date =  date("y-m-d ");
       $name = mysqli_real_escape_string($db,trim($_POST['name'])); 
       $fathername= mysqli_real_escape_string($db,trim($_POST['fathername']));
       $mothername = mysqli_real_escape_string($db,trim($_POST['mothername'])); 

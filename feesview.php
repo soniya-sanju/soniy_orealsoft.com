@@ -41,7 +41,7 @@ include("include/tableheader.php");
               <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                 
+                  John Pierce
                   <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
                 </h3>
                 <p class="text-sm">I got your message bro</p>
@@ -126,8 +126,8 @@ include("include/tableheader.php");
         <div class="image">
           <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-       <div class="info">
-          <a href="" class="d-block"></a>
+        <div class="info">
+          <a href="#" class="d-block">Alexander Pierce</a>
         </div>
       </div>
 
@@ -178,59 +178,39 @@ include("include/tableheader.php");
                   <thead >
                   <tr>
                     <th>Sl No</th>
-                    <th>Name</th>
-                    <th>Father Name</th>
-                    <th>Mother Name</th>
-                    <th>Address</th>
-                    <th>Mobile number</th>
-                    <th>Mobile Number 2</th>
-                    <th>Date Of Birth</th>
-                    <th>Adhar Number</th>
                     <th>Student Id</th>
-                    <th>Student Image</th>
-                    <th>Qualification</th>
+                    <!--<th>Name</th>
+                    <th>Mobile number</th>
                     <th>Course selcted</th>
-                    <th>Sub course</th>
-                    <th>Time duration</th>
-                    <th>Fees structure</th>
-                
-                    <th>Book</th>
-                    <th>Estimated ending time</th>
-                    <th>Update</th>
+                    <th>Sub course</th>-->
+                    <th>Fees</th>
+                    <th>Advance Amount</th>
+                    <!--<th>Paying Amount</th>-->
+                    <th>Balance Amount</th>
+                   <!--<th>Update</th>-->
                     <th>Delete</th>
-                    <th>Pay Fees</th>
-                    
+                   
                   </tr>
                   <tfoot>
                     <tr>
                     <th>Sl No</th>
-                    <th>Name</th>
-                    <th>Father Name</th>
-                    <th>Mother Name</th>
-                    <th>Address</th>
-                    <th>Mobile number</th>
-                    <th>Mobile Number 2</th>
-                    <th>Date Of Birth</th>
-                    <th>Adhar Number</th>
                     <th>Student Id</th>
-                    <th>Student Image</th>
-                    <th>Qualification</th>
+                   <!--<th>Name</th>
+                    <th>Mobile number</th>
                     <th>Course selcted</th>
-                    <th>Sub course</th>
-                    <th>Time duration</th>
-                    <th>Fees structure</th>
-                   
-                    <th>Book</th>
-                    <th>Estimated ending time</th>
-                    <th>Update</th>
+                    <th>Sub course</th>-->
+                    <th>Fees</th>
+                    <th>Advance Amount</th>
+                    <!--<th>Paying Amount</th>-->
+                    <th>Balance Amount</th>
+                    <!--<th>Update</th>-->
                     <th>Delete</th>
-                    <th>Pay Fees</th>
                     
                   </tr>
                   </tfoot>
                    </thead>
                   <?php
-                $result = $db->query("SELECT * FROM student_register");
+                $result = $db->query("SELECT * FROM payment");
                 $counter = 0;
                 if(mysqli_num_rows($result) > 0) {
               ?>
@@ -242,34 +222,23 @@ include("include/tableheader.php");
                  
              <tr>
             <td><?php echo ++$counter; ?> </td>
-            <td><?php echo $row["name"]; ?></td>
-            <td><?php echo $row["fathername"]; ?></td>
-            <td><?php echo $row["mothername"]; ?></td>
-            <td><?php echo $row["address"]; ?></td>
-            <td><?php echo $row["mobile"]; ?></td>
-            <td><?php echo $row["mobile1"]; ?></td>
-            <td><?php echo $row["dob"]; ?></td>
-            <td><?php echo $row["adharno"]; ?></td>
             <td><?php echo $row["studentid"]; ?></td>
-            <td><?php echo $row["stu_image"]; ?></td>
-            <td><?php echo $row["qualification"]; ?></td>
+            <!--<td><?php echo $row["name"]; ?></td>
+            <td><?php echo $row["mobile"]; ?></td>
             <td><?php echo $row["coursename"]; ?></td>
-            <td><?php echo $row["subcourse"]; ?></td>
-            <td><?php echo $row["duration"]; ?></td>
+            <td><?php echo $row["subcourse"]; ?></td>-->
             <td><?php echo $row["fees"]; ?></td>
-        <!--<td><?php echo ($row['fees'] - $row['payamount']);?></td>-->
-            <td><?php echo $row["book"]; ?></td>
-            <td><?php echo $row["endingtime"]; ?></td>
-
-            <td><a href="updatestudent.php?id=<?php echo $row['id'];?>&opr=upd ">
+            <td><?php echo $row["advance_fees"]; ?></td>
+            <!--<td><?php echo $row["payamount"]; ?></td>-->
+            <td><?php echo ($row['fees'] - $row['advance_fees']);?></td>
+            <!--<td><a href="updatepayment.php?id=<?php echo $row['id'];?>&opr=upd ">
               <i style="font-size:18px" class="fa">&#xf044;</i>
-            </a></td>
+            </a></td>-->
+            <td><a href="feesview.php?id=<?php echo $row['id'];?>&opr=del ">
 
-            <td><a href="studentregisterview.php?id=<?php echo $row['id'];?>&opr=del ">
              <i class="fa fa-trash" aria-hidden="true"></i>
             </a></td>
-
-            <td><a href="payment.php?studentid=<?php echo $row['studentid'];?>&opr=upd "class="btn btn-sm btn-info">Pay Today</a></td>
+            
             </tr>
            
             <?php
@@ -306,14 +275,14 @@ include("include/tablefooter.php");
  
 
           if($opr=='del'){  
-            $sql= mysqli_query($db,"DELETE FROM student_register WHERE id='" . $_GET["id"] . "'");
+            $sql= mysqli_query($db,"DELETE FROM payment WHERE id='" . $_GET["id"] . "'");
             if (mysqli_query($db, $sql)) {
                 echo "Record deleted successfully";
             }  
     if(mysqli_affected_rows($db)){
         echo "<script>
         alert('Data Deleted');
-        window.location.href = 'studentregisterview.php';
+        window.location.href = 'feesview.php';
         </script>";
         exit;
       }
@@ -321,7 +290,6 @@ include("include/tablefooter.php");
        echo "Opps something wrong!"; 
       }
     }
-  
   ?>
 
 <script>

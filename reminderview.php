@@ -12,6 +12,7 @@ if(isset($_GET['id'])){
             
 include("include/tableheader.php");
 ?>
+<body>
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -41,7 +42,7 @@ include("include/tableheader.php");
               <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
-                 
+                  John Pierce
                   <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
                 </h3>
                 <p class="text-sm">I got your message bro</p>
@@ -124,11 +125,9 @@ include("include/tableheader.php");
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="../../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
-       <div class="info">
-          <a href="" class="d-block"></a>
-        </div>
+       
       </div>
 
       <!-- SidebarSearch Form -->
@@ -156,12 +155,12 @@ include("include/tableheader.php");
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Reminder Table</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item active">Reminder</li>
             </ol>
           </div>
         </div>
@@ -170,7 +169,7 @@ include("include/tableheader.php");
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Student Register View Table</h3>
+                <h3 class="card-title">Reminder Table</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body" id="example">
@@ -178,59 +177,15 @@ include("include/tableheader.php");
                   <thead >
                   <tr>
                     <th>Sl No</th>
-                    <th>Name</th>
-                    <th>Father Name</th>
-                    <th>Mother Name</th>
-                    <th>Address</th>
-                    <th>Mobile number</th>
-                    <th>Mobile Number 2</th>
-                    <th>Date Of Birth</th>
-                    <th>Adhar Number</th>
-                    <th>Student Id</th>
-                    <th>Student Image</th>
-                    <th>Qualification</th>
-                    <th>Course selcted</th>
-                    <th>Sub course</th>
-                    <th>Time duration</th>
-                    <th>Fees structure</th>
-                
-                    <th>Book</th>
-                    <th>Estimated ending time</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                    <th>Pay Fees</th>
-                    
+                    <th>TO</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                    <th>Delete</th>                    
                   </tr>
-                  <tfoot>
-                    <tr>
-                    <th>Sl No</th>
-                    <th>Name</th>
-                    <th>Father Name</th>
-                    <th>Mother Name</th>
-                    <th>Address</th>
-                    <th>Mobile number</th>
-                    <th>Mobile Number 2</th>
-                    <th>Date Of Birth</th>
-                    <th>Adhar Number</th>
-                    <th>Student Id</th>
-                    <th>Student Image</th>
-                    <th>Qualification</th>
-                    <th>Course selcted</th>
-                    <th>Sub course</th>
-                    <th>Time duration</th>
-                    <th>Fees structure</th>
-                   
-                    <th>Book</th>
-                    <th>Estimated ending time</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                    <th>Pay Fees</th>
-                    
-                  </tr>
-                  </tfoot>
                    </thead>
                   <?php
-                $result = $db->query("SELECT * FROM student_register");
+                
+                $result=mysqli_query($db,"SELECT * FROM reminder");
                 $counter = 0;
                 if(mysqli_num_rows($result) > 0) {
               ?>
@@ -241,35 +196,15 @@ include("include/tableheader.php");
               ?>
                  
              <tr>
-            <td><?php echo ++$counter; ?> </td>
-            <td><?php echo $row["name"]; ?></td>
-            <td><?php echo $row["fathername"]; ?></td>
-            <td><?php echo $row["mothername"]; ?></td>
-            <td><?php echo $row["address"]; ?></td>
-            <td><?php echo $row["mobile"]; ?></td>
-            <td><?php echo $row["mobile1"]; ?></td>
-            <td><?php echo $row["dob"]; ?></td>
-            <td><?php echo $row["adharno"]; ?></td>
-            <td><?php echo $row["studentid"]; ?></td>
-            <td><?php echo $row["stu_image"]; ?></td>
-            <td><?php echo $row["qualification"]; ?></td>
-            <td><?php echo $row["coursename"]; ?></td>
-            <td><?php echo $row["subcourse"]; ?></td>
-            <td><?php echo $row["duration"]; ?></td>
-            <td><?php echo $row["fees"]; ?></td>
-        <!--<td><?php echo ($row['fees'] - $row['payamount']);?></td>-->
-            <td><?php echo $row["book"]; ?></td>
-            <td><?php echo $row["endingtime"]; ?></td>
-
-            <td><a href="updatestudent.php?id=<?php echo $row['id'];?>&opr=upd ">
-              <i style="font-size:18px" class="fa">&#xf044;</i>
-            </a></td>
-
-            <td><a href="studentregisterview.php?id=<?php echo $row['id'];?>&opr=del ">
+            <td><?php echo ++$counter; ?></td> 
+            <td><?php echo $row["to_name"]; ?></td>
+            <td><?php echo $row["subject"]; ?></td>
+            <td><?php echo $row["message"]; ?></td>
+			<td><a href="reminderview.php?id=<?php echo $row['id'];?>&opr=del ">
              <i class="fa fa-trash" aria-hidden="true"></i>
             </a></td>
 
-            <td><a href="payment.php?studentid=<?php echo $row['studentid'];?>&opr=upd "class="btn btn-sm btn-info">Pay Today</a></td>
+           
             </tr>
            
             <?php
@@ -298,38 +233,32 @@ include("include/tableheader.php");
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+
+
 <?php 
-include("include/tablefooter.php");
+	include("include/tablefooter.php");
 
 ?>
 <?php
- 
 
-          if($opr=='del'){  
-            $sql= mysqli_query($db,"DELETE FROM student_register WHERE id='" . $_GET["id"] . "'");
-            if (mysqli_query($db, $sql)) {
-                echo "Record deleted successfully";
-            }  
-    if(mysqli_affected_rows($db)){
-        echo "<script>
-        alert('Data Deleted');
-        window.location.href = 'studentregisterview.php';
-        </script>";
-        exit;
-      }
-    else{
-       echo "Opps something wrong!"; 
-      }
-    }
-  
+if($opr=='del'){  
+$sql= mysqli_query($db,"DELETE FROM reminder WHERE id='" . $_GET["id"] . "'");
+if (mysqli_query($db, $sql)) {
+    echo "Record deleted successfully";
+}  
+if(mysqli_affected_rows($db)){
+echo "<script>
+alert('Data Deleted');
+window.location.href = 'reminderview.php';
+</script>";
+exit;
+}
+else{
+echo "Opps something wrong!"; 
+}
+}
+
   ?>
 
-<script>
-   $(document).ready(function () {
-    $('#example').DataTable({
-         scrollX: true,
-    });
-});
-</script>
 </body>
 </html>
