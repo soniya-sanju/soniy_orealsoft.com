@@ -34,7 +34,14 @@ include("include/logincheck.php");
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+<?php 
+$sqlq="SELECT * FROM student_register ";
 
+  $result = mysqli_query($db,$sqlq);
+  if(mysqli_num_rows($result) >0)
+  {        
+  $row = mysqli_fetch_array($result);
+  ?>
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -229,6 +236,9 @@ include("include/logincheck.php");
                 <!--/.direct-chat-messages-->
 
                 <!-- Contacts are loaded here -->
+                <?php 
+              }
+             ?> 
                 <div class="direct-chat-contacts">
                   <ul class="contacts-list">
                     <li>
